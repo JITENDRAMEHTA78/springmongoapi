@@ -15,7 +15,7 @@ public class TenantData {
   private static final String BASE_IMG_URL = "https://storage.googleapis.com/eclinic_assets/tenants/";
 
 //  private static final String DOMAIN = "ec.dev.sixsprintscloud.com";
-  private static final String DOMAIN = "proclinic.in";
+  private static final String DOMAIN = "herokuapp.com";
 
   public static final List<TenantDto> TENANTS = ImmutableList.<TenantDto>builder()
     .add(jyoti())
