@@ -1,0 +1,152 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Comfortaa";
+  font-size: 10px;
+  line-height: 2.4rem;
+  color: #797687;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Comfortaa";
+  margin-top: 0;
+  font-weight: 400;
+  color: #797687;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.label {
+  text-transform: capitalize;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.label-3 {
+  text-transform: capitalize;
+  line-height: 1.8rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.label-2 {
+  text-transform: capitalize;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.footer-info {
+  font-size: 12px;
+}
+
+.item {
+  width: 100%;
+}
+
+.item > div:nth-child(odd) {
+  padding-right: 10%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.item > div:nth-child(even) {
+  padding-left: 10%;
+}
+
+.data-container :nth-child(odd) {
+  text-align: left;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.data-container :nth-child(even) {
+  text-align: right;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.column {
+  width: 50%;
+}
+.column:nth-child(even) {
+  padding-right: 15%;
+  float: left;
+}
+
+.column:nth-child(odd) {
+  padding-left: 15%;
+  float: right;
+}
+
+.examine-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+}
+
+.examine-left-container {
+  width: 70%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.examine-right-container {
+  width: 30%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: right;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.logo__img {
+  height: 60px;
+  width: 60px;
+}
+
+.qr__img {
+  height: 120px;
+  width: 120px;
+}

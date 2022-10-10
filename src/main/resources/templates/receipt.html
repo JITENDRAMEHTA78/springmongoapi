@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comfortaa"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://storage.googleapis.com/eclinic_assets/templates/receipt/css/style_v1.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.25.3/moment.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-timezone-with-data.min.js"></script>
+  </head>
+  <body>
+    <header class="header hr">
+      <script id="header-template" type="text/x-handlebars-template">
+        <div class='hospital-info'>
+          <h1 class='f-17 primary fw-bold pb-10'>
+            {{tenant.shortTitle}}
+          </h1>
+          <p class='w-70 f-12 secondary lh-18 fw-regular'>
+            {{getAddress tenant.contactInfo}}
+          </p>
+        </div>
+        <div class='receipt-info'>
+          <h2 class='f-14 fw-bold primary pb-5'>
+            OPD Receipt
+          </h2>
+          <h3 class='f-13 fw-bold primary pb-5'>
+            Receipt No. :
+            <span class='secondary fw-regular'>
+              RCT/{{appointment.slug}}
+            </span>
+          </h3>
+          <p class='f-13 fw-regular secondary lh-18'>
+            Phone :
+            {{tenant.contactInfo.contactNumber}}
+          </p>
+          <p class='f-13 fw-regular secondary lh-18'>
+            {{tenant.contactInfo.email}}
+          </p>
+        </div>
+      </script>
+    </header>
+    <section>
+      <div class="patient-info">
+        <script id="patient-template" type="text/x-handlebars-template">
+          {{#if patient.uhid}}
+            <div>
+              <table>
+                <tr>
+                  <td class='label'>
+                    UHID
+                  </td>
+                  <td class='value'>
+                    {{patient.uhid}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{/if}}
+          {{#if appointment.dateTime}}
+            <div>
+              <table>
+                <tr>
+                  <td class='label'>
+                    Date
+                  </td>
+                  <td class='value'>
+                    {{currentDate}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{/if}}
+          {{#if patient.name}}
+            <div>
+              <table>
+                <tr>
+                  <td class='label'>
+                    Patient
+                  </td>
+                  <td class='value'>
+                    {{patient.name}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{/if}}
+          {{#if patient.mobileNumber}}
+            <div>
+              <table>
+                <tr>
+                  <td class='label'>
+                    Phone
+                  </td>
+                  <td class='value'>
+                    {{patient.mobileNumber}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{/if}}
+          {{#if patient.gender}}
+            <div>
+              <table>
+                <tr>
+                  <td class='label'>
+                    Gender
+                  </td>
+                  <td class='value'>
+                    {{getGender patient.gender}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{/if}}
+          {{#if patient.email}}
+            <div>
+              <table>
+                <tr>
+                  <td class='label'>
+                    Email
+                  </td>
+                  <td class='value'>
+                    {{patient.email}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          {{/if}}
+        </script>
+      </div>
+    </section>
+    <section class="m-15">
+      <div class="appointment-info">
+        <script id="appointment-template" type="text/x-handlebars-template">
+          {{#with appointment}}
+            {{#if type}}
+              <h4 class='f-11 fw-bold primary lh-20'>
+                Appointment Type :
+                <span class='f-11 fw-regular secondary lh-20'>
+                  {{type}}
+                </span>
+              </h4>
+            {{/if}}
+            {{#if remarks}}
+              <h4 class='f-11 fw-bold primary lh-20'>
+                Remarks :
+                <span class='f-11 fw-regular secondary lh-20'>
+                  {{remarks}}
+                </span>
+              </h4>
+            {{/if}}
+          {{/with}}
+        </script>
+      </div>
+    </section>
+    <section>
+      <div class="dr-info">
+        <script id="dr-template" type="text/x-handlebars-template">
+            <table class="table">
+              <thead class="th">
+                <tr>
+                  <td class="td label">
+                    Consulting Doctor
+                  </td>
+                  <td class="td label">
+                    Department
+                  </td>
+                  <td class="td label">
+                    Charges
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td value">
+                    Dr. {{appointment.doctor.name}}
+                  </td>
+                  <td class="td value">
+                    {{appointment.doctor.speciality}}
+                  </td>
+                  <td class="td value">
+                     {{getAmount appointment.fees}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="amount-info">
+            <table class="table-w-50">
+              <tr>
+                <td class="value td--1">
+                  Discount {{getStatus appointment}}
+                </td>
+                <td class="value">
+                  {{getAmount appointment.discount}}
+                </td>
+              </tr>
+              <tr>
+                <td class="label td--1">
+                  Total Charges
+                </td>
+                <td class="label">
+                  {{getAmount totalAmount}}
+                </td>
+              </tr>
+            </table>
+        </script>
+      </div>
+    </section>
+    <section>
+      <div class="payment-info">
+        <h4 class="label pb-10">Payment Mode</h4>
+        <script id="payment-template" type="text/x-handlebars-template">
+          <div style='display:flex;width:50%'>
+            <table class='payment-table' style='table-layout: fixed;width:100%'>
+              {{{getPaymentStatus appointment.mode totalAmount}}}
+            </table>
+          </div>
+        </script>
+      </div>
+    </section>
+    <footer class="footer-info">
+      <script id="footer-template" type="text/x-handlebars-template">
+        <p class='f-10 fw-regular mt-5 secondary'>
+          *This is computer generated receipt no signature required | Print Date
+          & Time :
+          {{formattedDate appointmentDate}}
+        </p>
+      </script>
+    </footer>
+
+    <script>
+      /*<![CDATA[*/
+      const url =
+        '[[${serverUrl}]]/api/v1/appointment/receipt/print/[[${appointmentSlug}]]';
+      const getDataList = fetch(url, {})
+        .then(response => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error('Something bad happened');
+          }
+        })
+        .then(data => {
+          return data.data;
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+
+      Handlebars.registerHelper('getAddress', function (addressObj) {
+        return `${addressObj.addressLine1 ? addressObj.addressLine1 + ', ' : ''}
+           ${addressObj.addressLine2 ? addressObj.addressLine2 + ', ' : ''}
+           ${addressObj.city ? addressObj.city + ', ' : ''}
+           ${addressObj.state ? addressObj.state : ''}
+           ${
+             addressObj.state
+               ? addressObj.pincode
+                 ? '- ' + addressObj.pincode
+                 : ''
+               : addressObj.pincode
+               ? 'Pincode- ' + addressObj.pincode
+               : ''
+           }
+            `;
+      });
+
+      Handlebars.registerHelper('getGender', function (value) {
+        return value.charAt(0).toUpperCase();
+      });
+
+      Handlebars.registerHelper('ifCond', function (v1, v2, options) {
+        if (v1 || v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      });
+
+      Handlebars.registerHelper('formattedDate', function (value) {
+        return moment.unix(value / 1000).format('DD MMMM, YYYY | HH:MM A');
+      });
+      Handlebars.registerHelper('currentDate', function() {
+        return moment().tz('Asia/Calcutta').format('DD MMMM, YYYY | hh:mm A');
+      });
+
+      Handlebars.registerHelper('getAmount', function (value) {
+        if (value) {
+          return `Rs ${value}`;
+        }
+        return value || 0;
+      });
+
+      Handlebars.registerHelper('getStatus', function (appointObj) {
+        let val = '';
+        if (appointObj.isFriends) {
+          val = '\n(Friends & Family)';
+        }
+        return val;
+      });
+
+      Handlebars.registerHelper('getPaymentStatus', function (mode, value) {
+        let list = ['Cash', 'UPI', 'Credit/Debit Card', 'E-Money'];
+        let tr = '';
+        for (let i = 0; i < list.length; i++) {
+          if (list[i] === mode) {
+            tr += `<tr>
+                          <td class="value lh-20">
+                             ${list[i]}
+                          </td>
+                          <td class="value lh-20">
+                             Rs. ${value}
+                          </td>
+                         </tr>`;
+          } else {
+            tr += `<tr>
+                      <td class="value lh-20">
+                        ${list[i]}
+                      </td>
+                      <td class="value lh-20">
+                        0
+                      </td>
+                      </tr>`;
+          }
+        }
+        return tr;
+      });
+
+      const data = getDataList.then(data => {
+        let respData = data;
+        $(document).ready(function () {
+          let hospitalInfoTemplate = $('#header-template').html();
+          let patientInfoTemplate = $('#patient-template').html();
+          let appointmentTemplate = $('#appointment-template').html();
+          let drTemplate = $('#dr-template').html();
+          let paymentTemplate = $('#payment-template').html();
+          let footerTemplate = $('#footer-template').html();
+
+          let compiledHosInfoTemplate =
+            Handlebars.compile(hospitalInfoTemplate);
+          let compiledPatInfoTemplate = Handlebars.compile(patientInfoTemplate);
+          let compiledAppointmentTemplate =
+            Handlebars.compile(appointmentTemplate);
+          let compiledDrTemplate = Handlebars.compile(drTemplate);
+          let compiledPaymentTemplate = Handlebars.compile(paymentTemplate);
+          let compiledFooterTemplate = Handlebars.compile(footerTemplate);
+
+          $('.header').html(compiledHosInfoTemplate(respData));
+          $('.patient-info').html(compiledPatInfoTemplate(respData));
+          $('.appointment-info').html(compiledAppointmentTemplate(respData));
+          $('.dr-info').html(compiledDrTemplate(respData));
+          $('.payment-info').html(compiledPaymentTemplate(respData));
+          $('.footer-info').html(compiledFooterTemplate(respData));
+        });
+      });
+
+      /*]]>*/
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  eclinic-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - PROFILE=dev
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      - PROFILE=dev
+      - SERVER_PORT=8080
+    container_name: eclinic-api
+    links:
+      - mongo-db
+    command: sh run-dev.sh
+    volumes:
+      - ${SERVICE_API:-.}:/app
+      - ${SERVICE_API:-.}/volume/m2:/root/.m2
+  mongo-db:
+    image: mongo:4.0
+    ports:
+      - 27017:27017
+    container_name: mongo-db
+    volumes:
+      - ${SERVICE_API:-.}/volume/db/:/data/db

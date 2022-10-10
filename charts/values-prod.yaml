@@ -1,0 +1,9 @@
+environment: prod
+replicaCount: 2
+ingress:
+  hosts: 
+    - api.proclinic.in
+  tls: 
+    - hosts: 
+      - api.proclinic.in
+      secretName: apiproclinicin

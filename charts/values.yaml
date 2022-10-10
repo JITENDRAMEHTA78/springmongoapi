@@ -1,0 +1,51 @@
+replicaCount: 1
+
+jvmOpts: "-Xms128M -Xmx1024M"
+
+image:
+  repository: registry.gitlab.com/six-sprints/eclinic/eclinic-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imageCredentials:
+  registry: registry.gitlab.com
+  username: ss-gitlab-bot
+  password: is4dB_6Fv8zEUVXYmAV5
+
+healthPath: /
+
+secretName: eclinic-api-secret
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 8080
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+  hosts: 
+    - api.ec.dev.sixsprintscloud.com
+  tls: 
+    - hosts: 
+      - api.ec.dev.sixsprintscloud.com
+      secretName: api.ec.dev.sixsprintscloud.com
+
+resources:
+  requests:
+    memory: 128Mi
+  limits:
+    memory: 1024Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "six-sprints-cloud",
+  "private_key_id": "616cdb357bfaddc9f503b9a703d2dc1f913f2e60",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC65VpLRMq+1pC/\nbhVq/AZ1EssTEMCe8IUbxn7gp1oMjwrGxOBlY6Pk5SoPebUHKN/vlzsLlGjTvbYN\nw2FXbIELmdVod53TVBEaW574wGeICCk/rD+gKoGtulT+nqNRKb5vUXufWtJF/IyI\nNSKaRNQs31KeUDJf2gAi095a1g22sVEEImy548AgVC3/obV092b9evQF8S0BQIOZ\n/IN48d/b10l4tKgz7yPFNOV7jvYffx9vZMTeqzHzkRFZk87zzFsO7bxKyMbBYSzK\nSRcW6Xx9ENWdheoX/ilarJbGEUiBoxkZVSU3UEMFc/lyXJkefcbYyxROWGMqa69x\nuq6A3f4PAgMBAAECggEAPwqB7IWlxb1mUcv2GYItQ2w1Z5btAi+rFnVb8rdAXqAZ\nSHa8Ijb734eVKmcpMuMMtipS1lMXEOUa9YWD3hNRa/JV08kVSWU/554j/1AXHAF0\nuG+HfqUX3NvPM5ubBxOHktDvXA8sgkLvvDoAE/1HfGNP4Oq4MzC7fwPsKsOtGIQe\n9FlG30bVYy03EgvLVQ5Dtb3jE7skkxtUKDkSODWRnkVvHfUKW3r5HUCsvXs1cYeq\nbMGTjB1VpFKvTkSme8sPGZdX/3U/WNFGY3VMPoUrC2vCfs6qdkgse9Z4lf4cfpb+\nKCTUkBwu1P3FwqXsTyICZ7eSKvolrecszZHo9b3xwQKBgQDt4VaB8iUZG3CLJh/a\nvxTRNTxaOCnDhm/CD260sNCHS6X+LF5pEXwPjhMkJBLTf1+j6ULasUg61p/bR4zB\noxyT7EAJbIwNsOBixYW1p4VbPz0gUD39d49IXYVKE4AizHxTUnPpUH7mH6uGLNht\n1MfBNLT15kHmyHh+MvVwmP8e3wKBgQDJIdIz6qzVdQFZWEITZitNW3Ybydy3e8oS\nK5orsHw1hbYnSihuJUhutArTZ9ZWUATZBUOQelFRvxzZ4MmYyVCq/LZXslUaLaff\nBGtfKt04po1kWN8JOD86QHLelYm6500eZr/ri3Ywk6WJqdqeVxgvLArjD7l2kY8y\nlHVaWgV20QKBgDWtFxwTS5OywV5kp+NwIn5iiM/CxIm+GBGt8ckL7MHarAYCdPs4\nWsoXwPHywdy/bRFLXS6DukysiT2tk3FOIPCv6nM17xRXyQoAj/9BYbIJPv2/nX1I\nMSifEah5Zfx0L8mNXWJUK445rzaDgAKodLp/7iVeY5hzu9yeGwvhOg/5AoGATNdd\nBXSs30g6YbX0WJD6Di3ZK7itWHQ0uUhrODHO4mvZMZ2FYL9hstmaITZUjtk3YOo/\n69yvYLnQ/fSBUJvo88pkp5B8Luoubmez1cH8jn4jGqlRXKZekZS5zgv3eK6RqgG7\nZPP9DYX7AmMgIMpJdQwwhJsnUgM+YCaTxxcJa2ECgYEApxpK8hOprHt66BKxic+2\nuz47STM2bXMFSRlQNdKZZPSuU08yXUzrHRIhqaeBQGoT2D08GrpppMn8LXScfUOj\nhRlOCSdGzUYyh19VHXWCRZirJukYElnQBSBaEQ66nS93iUzmTo1yPGitiGbDBlyV\n0l1ENueQPWQC9Gl3cEb56ls=\n-----END PRIVATE KEY-----\n",
+  "client_email": "storage-bot@six-sprints-cloud.iam.gserviceaccount.com",
+  "client_id": "117004573254739293977",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/storage-bot%40six-sprints-cloud.iam.gserviceaccount.com"
+}

@@ -1,0 +1,184 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link
+      href='https://fonts.googleapis.com/css?family=Comfortaa'
+      rel='stylesheet'
+    />
+    <link
+      href='https://storage.googleapis.com/eclinic_assets/templates/css/style.css'
+      rel='stylesheet'
+    />
+  </head>
+  <body>
+    <header
+      class='top__head'
+      style='
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 1.5px solid grey;
+      '
+    >
+      <div class='logo__container'>
+        <img src='{{tenant.logo}}' alt='site logo' class='logo__img' />
+        <h3>Date : {{prettyDate date}}</h3>
+      </div>
+      <div class='info__container' style='text-align: right;'>
+        <h3>Ph : {{tenant.contactInfo.contactNumber}}</h3>
+        <h3>Email : {{tenant.contactInfo.email}}</h3>
+      </div>
+    </header>
+
+    <section>
+      <div class='container'>
+        {{#with patient}}
+          {{#if name}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='label'>Name</div>
+                <div>{{name}}</div>
+              </div>
+            </div>
+          {{/if}}{{#if email}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='label'>Email</div>
+                <div>{{email}}</div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if gender}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='label'>Gender</div>
+                <div>{{gender}}</div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if mobileNumber}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='label'>Mobile Number</div>
+                <div>{{mobileNumber}}</div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if uhid}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='label'>UHID</div>
+                <div>{{uhid}}</div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if dob}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='label'>Date of birth</div>
+                <div>{{prettyDate dob}}</div>
+              </div>
+            </div>
+          {{/if}}
+        {{/with}}
+      </div>
+    </section>
+
+    <section>
+      <div class='examine-container'>
+        <div class='examine-left-container'>
+          {{#with prescription}}
+            {{#if prov}}
+              <div class='prop-container'>
+                <div>Provisional Diagnosis</div>
+                <div class='label-2'>{{{htmlTransform prov}}}</div>
+              </div>
+            {{/if}}
+            {{#if (ifCond chiefComplaints hopi)}}
+              <div class='prop-container'>
+                <div class='label-2'>Patient Complained of</div>
+                {{#if chiefComplaints}}
+                  <div>{{{htmlTransform chiefComplaints}}}</div>
+                {{/if}}
+                {{#if hopi}}
+                  <div>{{{htmlTransform hopi}}}</div>
+                {{/if}}
+              </div>
+            {{/if}}
+            {{#if (ifCond vitals remarks)}}
+              <div class='prop-container'>
+                <div class='label-2'>On Examining the Patient</div>
+                {{#if vitals}}
+                  <div>{{formatToString vitals}}</div>
+                {{/if}}
+                {{#if remarks}}
+                  <div>{{{htmlTransform remarks}}}</div>
+                {{/if}}
+              </div>
+            {{/if}}
+            {{#if treatment}}
+              <div class='prop-container'>
+                <div class='label-2'>Suggested Medication</div>
+                <div>{{{htmlTransform treatment}}}</div>
+              </div>
+            {{/if}}
+            {{#if dietaryRestriction}}
+              <div class='prop-container'>
+                <div class='label-2'>Restrictions</div>
+                <div>{{{htmlTransform dietaryRestriction}}}</div>
+              </div>
+            {{/if}}
+            {{#if surgicalPlan}}
+              <div class='prop-container'>
+                <div class='label-2'>Suggested Investigations</div>
+                <div>{{{htmlTransform surgicalPlan}}}</div>
+              </div>
+            {{/if}}
+            {{#if followUp}}
+              <div class='prop-container'>
+                <div class='label-2'>Follow up after
+                  {{{htmlTransform followUp}}}
+                  as per appointment</div>
+              </div>
+            {{/if}}
+          {{/with}}
+        </div>
+        <div class='examine-right-container'>
+          {{#if prescription}}
+            {{#with prescription}}
+              <div class='label-3 prop-container'>
+                Scan the code below to view<br />this prescription online
+              </div>
+              <img
+                src='data:image/png;base64,{{qrCode}}'
+                alt='site logo'
+                class='qr__img'
+              />
+            {{/with}}
+          {{/if}}
+          {{#each prescription.diagrams}}
+            <div style='margin-top: 5px;'>
+              <img src='{{this}}' alt='site logo' class='qr__img' />
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <footer class='footer' style='margin-top: 5rem;'>
+      <div class='row'>
+        <div class='footer__container'>
+          {{#with doctor}}
+            <img src='{{signature}}' alt='site logo' class='qr__img' />
+            <h2>Dr. {{name}}</h2>
+            <h2>{{shortTitle}}</h2>
+            <p class='footer-info'>{{speciality}}</p>
+            <p class='footer-info'>{{registrationNo}}</p>
+          {{/with}}
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+environment: preprod
+ingress:
+  hosts: 
+    - api.pp.proclinic.nixet.io
+  tls: 
+    - hosts: 
+      - api.pp.proclinic.nixet.io
+      secretName: api-pp-proclinic-nixet-io

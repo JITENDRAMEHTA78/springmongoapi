@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<html style="width:100%;font-family:'Comfortaa';-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;" >
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Comfortaa" />
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="telephone=no" name="format-detection">	
+</head>
+
+<body style="width:100%;font-family:'Comfortaa';-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;" >
+    <div class="es-wrapper-color" style="background-color:#FFF;" >
+        <!--[if gte mso 9]>
+			<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+				<v:fill type="tile" color="#555555"></v:fill>
+			</v:background>
+		<![endif]-->
+        <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;width:100%;height:100%;background-image:;background-repeat:repeat;background-position:center top;" >
+            <tbody>
+                <tr style="border-collapse:collapse;" >
+                    <td class="esd-email-paddings" valign="top" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;" >
+                        <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;" >
+                            <tbody>
+                                <tr style="border-collapse:collapse;" >
+                                    <td class="esd-stripe" align="center" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;" >
+                                        <table class="es-content-body" width="700" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#f8f8f8;" >
+                                            <tbody>
+                                                <tr style="border-collapse:collapse;" >
+                                                    <td class="esd-structure es-p50t es-p20b es-p20r es-p60l top-md-wt" esd-general-paddings-checked="false"  bgcolor="#ffcc99" align="left" style="Margin:0;padding-bottom:20px;padding-right:20px;padding-left:60px;padding-top:50px;background-color:#FFF;background-image:url(images/left-img.png);background-repeat:no-repeat;background-position:right 20%;background-attachment:scroll;" >
+                                                        <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;" >
+                                                            <tbody>
+                                                                <tr style="border-collapse:collapse;" >
+                                                                    <td class="esd-container-frame" width="560" valign="top" align="left" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;" >
+                                                                        <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;" >
+                                                                            <tbody>
+                                                                                <tr style="border-collapse:collapse;" >
+                                                                                    <td class="esd-block-text es-p15t es-p15b" align="left" style="padding-right:0;padding-left:0;Margin:0;padding-top:15px;padding-bottom:15px;" >
+                                                                                        <div class="esd-text">
+                                                                                            <h4 class="hlo" style="Margin:0;line-height:120%;mso-line-height-rule:exactly;font-family:Comfortaa;" ><span style="font-size:18px;color:#000;" ><strong th:text="|Dear ${patient.name},|"></strong></span><br></h2>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr style="border-collapse:collapse;" >
+                                                                                    <td class="esd-block-text" align="left" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;Margin:0;" >
+                                                                                        <p class="jths" th:text="|Thank you for your visit to Dr. ${doctor.name} on ${appointmentDate}. A copy of your prescription is enclosed for your reference.|" style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Comfortaa;line-height:150%;font-size:16px;color:#595959;" >
+                                                                                        </p><br/>
+                                                                                       
+                                                                                    </td>
+                                                                                </tr>                                                                          
+
+                                                                                <tr style="border-collapse:collapse;" >
+                                                                                    <td class="esd-block-text es-p20t" align="left" style="padding-bottom:0;padding-right:0;padding-left:0;Margin:0;padding-top:20px;" >
+                                                                                        <p class="cncl" style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Comfortaa;line-height:150%;font-size:16px;color:#595959;" >Book your next appointment online at&nbsp; 
+                                                                                            <a th:href="${doctor.websiteUrl}" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Comfortaa;font-size:14px;text-decoration:none;color:#338dfd;font-weight:600;">[[${doctor.websiteUrl}]]</a>
+                                                                                        </p>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr style="border-collapse:collapse;" >
+                                                                                    <td class="esd-block-text es-p20t" align="left" style="padding-bottom:0;padding-right:0;padding-left:0;Margin:0;padding-top:20px;" >
+                                                                                        <p class="rgds" style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Comfortaa;line-height:150%;font-size:16px;color:#595959;padding-bottom:5px;padding-top:30px;" >Regards,</p>
+                                                                                        <p class="staff" style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Comfortaa;line-height:150%;font-size:16px;color:#595959;padding-bottom:5px;" >The Staff & Physicians at</p>
+                                                                                        <p class="hsp" th:text="|${tenant.shortTitle}|" style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Comfortaa;line-height:150%;font-size:16px;color:#000;font-weight:600;" ></p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                             
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

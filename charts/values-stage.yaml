@@ -1,0 +1,8 @@
+environment: stage
+ingress:
+  hosts: 
+    - api.stg.proclinic.nixet.io
+  tls: 
+    - hosts: 
+      - api.stg.proclinic.nixet.io
+      secretName: api-stg-proclinic-nixet-io

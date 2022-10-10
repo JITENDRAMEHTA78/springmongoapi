@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comfortaa"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://storage.googleapis.com/eclinic_assets/templates/prescription/css/style_v4.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.25.3/moment.min.js"></script>
+  </head>
+  <body>
+    <div class="letter-header">
+      <script id="header-template" type="text/x-handlebars-template">
+        {{#with prescription}}
+          {{{getLetterHead printLetterHead headerSpacing}}}
+        {{/with}}
+      </script>
+    </div>
+    <header class="top__head">
+      <script id="container-template" type="text/x-handlebars-template">
+        {{#with this}}
+          {{#if patient.name}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='f-10 primary semi-bold'>
+                  {{getPatientInfo patient.name patient.dob patient.gender}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if patient.uhid}}
+            <div class='column col-uhid'>
+              <div class='child-container'>
+                <div class='f-10 primary semi-bold'>
+                  UHID :
+                </div>
+                <div class='f-10 secondary medium'>
+                  {{patient.uhid}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if patient.mobileNumber}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='f-10 primary semi-bold'>
+                  Ph :
+                </div>
+                <div class='f-10 secondar medium'>
+                  {{patient.mobileNumber}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if prescription.date}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='f-10 primary semi-bold'>
+                  Date :
+                </div>
+                <div class='f-10 secondary medium'>
+                  {{formattedDate prescription.date}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if prescription.nextAppointmentDate}}
+            <div class='column'>
+              <div class='child-container'>
+                <div class='f-10 primary semi-bold'>
+                  Next Appointment Date :
+                </div>
+                <div class='f-10 secondary medium'>
+                  {{formattedDate prescription.nextAppointmentDate}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if patient.address}}
+            <div class='column col-address'>
+              <div class='child-container'>
+                <div class='f-10 primary semi-bold'>
+                  Address :
+                </div>
+                <div class='f-10 secondary medium'>
+                  {{patient.address}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+        {{/with}}
+      </script>
+    </header>
+    <hr class="hr" />
+
+    <section style="margin-top: 10px">
+      <div class="examine-container">
+        <div class="examine-left-container">
+          <div class="prescription-container">
+            <script
+              id="examine-left-template"
+              type="text/x-handlebars-template"
+            >
+              {{#if disclaimer}}
+                <div class='prop-container'>
+                  <span class='f-7 primary semi-bold' style='font-size:8px'>
+                    Disclaimer -
+                    {{{disclaimer}}}
+                  </span>
+                </div>
+              {{/if}}
+              {{#with prescription}}
+                {{#if prov}}
+                  <div class='prop-container'>
+                    <span class='f-10 primary semi-bold'>
+                      Prov. Diagnosis
+                      <span class='f-10 secondary medium'>
+                        {{{listInlineSpace prov}}}
+                      </span>
+                    </span>
+                  </div>
+                {{/if}}
+                {{#ifCond chiefComplaints hopi}}
+                  <div class='prop-container'>
+                    {{#if chiefComplaints}}
+                      <span class='f-10 primary semi-bold'>
+                        Complaints
+                        <span class='f-10 secondary medium'>
+                          {{#if chiefComplaints}}
+                            {{{listInline chiefComplaints}}}
+                          {{/if}}
+                        </span>
+                      </span>
+                    {{/if}}
+                    {{#if hopi}}
+                      <div class='prop-container'>
+                        <span class='f-10 secondary medium'>
+                          {{{listInline hopi}}}
+                        </span>
+                      </div>
+                    {{/if}}
+                  </div>
+                {{/ifCond}}
+                {{#ifCondFor3 vitals coMorbidities examination}}
+                  <div class='prop-container'>
+                    <div class='f-10 primary semi-bold'>
+                      On Examining the Patient
+                    </div>
+                    {{#if vitals}}
+                      <div style="display: flex; align-items: center;" class='prop-container'>
+                        <span class='f-10 primary semi-bold'>
+                          Vitals
+                        </span>
+                        <div class='f-10 secondary medium'>
+                          {{{formatToBullets vitals}}}
+                        </div>
+                      </div>
+                    {{/if}}
+                    {{#if coMorbidities}}
+                      <div style="display: flex; align-items: center;" class='prop-container'>
+                        <span class='f-10 primary semi-bold'>
+                          Co Morbidities
+                        </span>
+                        <div class='f-10 secondary medium'>
+                          {{{formatToBullets coMorbidities}}}
+                        </div>
+                      </div>
+                    {{/if}}
+                    {{#if examination}}
+                      <div class='f-10 secondary medium'>
+                        {{{listInline examination}}}
+                      </div>
+                    {{/if}}
+                  </div>
+                {{/ifCondFor3}}
+                {{#if medications}}
+                  <div class='prop-container'>
+                    <span class='f-10 primary semi-bold'>
+                      Suggested Medication
+                    </span>
+                    <div class='f-10 secondary medium'>
+                      {{{arrToList medications}}}
+                    </div>
+                  </div>
+                {{/if}}
+                {{#if surgicalPlan}}
+                  <div class='prop-container'>
+                    <span class='f-10 primary semi-bold'>
+                      Surgical Plan
+                    </span>
+                    <div class='f-10 secondary medium'>
+                      {{{htmlUlTransform surgicalPlan}}}
+                    </div>
+                  </div>
+                {{/if}}
+                {{#if dietaryRestriction}}
+                  <div clas='prop-container'>
+                    <span class='f-10 primary semi-bold'>
+                      Restrictions & Instructions
+                      <span class='f-10 secondary medium'>
+                        {{{listInline dietaryRestriction}}}
+                      </span>
+                    </span>
+                  </div>
+                {{/if}}
+                {{#if investigation}}
+                  <div class='prop-container'>
+                    <span class='f-10 primary semi-bold'>
+                      Suggested Investigations
+                      <span class='f-10 secondary medium'>
+                        {{{listInline investigation}}}
+                      </span>
+                    </span>
+                  </div>
+                {{/if}}
+                {{#if isFollowUpRequired}}
+                  <div class='prop-container'>
+                    <div class='f-8 secondary medium'>
+                      Follow Up After
+                      {{{htmlTransform followUp}}}
+                      As per Appointment 
+                    </div>
+                  </div>
+                {{/if}}
+              {{/with}}
+            </script>
+          </div>
+          <div class="footer" style="margin-top: 3rem">
+            <div class="row" style="width: 70%">
+              <div class="footer__container">
+                <script id="dr-data" type="text/x-handlebars-template">
+                  {{#with doctor}}
+                    <img src={{signature}} alt='site logo' class='logo__img' />
+                    <h2 class='f-10 primary semi-bold'>
+                      Dr.
+                      {{name}}
+                    </h2>
+
+                    {{#if shortTitle}}
+                      <h2 class='f-8 primary semi-bold lh-small'>
+                        {{{htmlTransform shortTitle}}}
+                      </h2>
+                    {{/if}}
+                    <h2 class='f-8 primary semi-bold lh-small'>
+                      {{registrationNo}}
+                    </h2>
+                  {{/with}}
+                </script>
+              </div>
+              <hr class="hr" />
+              <div class="container" style="margin-top: 10px">
+                <script id="info-data" type="text/x-handlebars-template">
+                  {{#with doctor}}
+                    <h2 class='f-10 primary semi-bold'>
+                      Book your next appointment at
+                      <a href='{{websiteUrl}}' target='_blank'>
+                        {{{websiteUrl}}}
+                      </a>
+                    </h2>
+                  {{/with}}
+                  {{#with tenant.contactInfo}}
+                    <h2 class='f-10 primary semi-bold'>
+                      {{email}}
+                      |
+                      {{contactNumber}}
+                    </h2>
+                  {{/with}}
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="examine-right-container">
+          <script id="examine-right-template" type="text/x-handlebars-template">
+            {{#if prescription}}
+              {{#with prescription}}
+                <div
+                  class='f-8 secondary medium'
+                  style='position:relative;z-index:1'
+                >
+                  Scan QR to view this prescription
+                </div>
+                <div style='margin-top:-12px;margin-bottom:-15px'>
+                  <img
+                    src='data:image/png;base64,{{qrCode}}'
+                    alt='QR code'
+                    class='qr__img'
+                  />
+                </div>
+              {{/with}}
+            {{/if}}
+            {{#each prescription.diagrams}}
+              <div style='margin-top:5px'>
+                <img src='{{this}}' alt='site logo' class='diag__img' />
+              </div>
+            {{/each}}
+          </script>
+        </div>
+      </div>
+    </section>
+    <script>
+      /*<![CDATA[*/
+
+      const getDataList = fetch(
+        '[[${serverUrl}]]/api/v1/appointment/print/[[${appointmentSlug}]]',
+        {}
+      )
+        .then(response => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error('Something bad happened');
+          }
+        })
+        .then(data => {
+          return data.data;
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+
+      function calcAge(value) {
+        var today = new Date();
+        var birthDate = new Date(value);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age + 'Y';
+      }
+
+      function addGenderPrefix(gender) {
+        let value = '';
+        if (gender.charAt(0) === 'M') {
+          value = 'Mr. ';
+        } else if (gender.charAt(0) === 'F') {
+          value = 'Ms. ';
+        } else {
+          value = '';
+        }
+        return value;
+      }
+
+      Handlebars.registerHelper('getPatientInfo', function (name, dob, gender) {
+        let value = '';
+        if (dob && gender) {
+          value =
+            addGenderPrefix(gender) +
+            name +
+            ' (' +
+            calcAge(dob) +
+            ' / ' +
+            gender.charAt(0) +
+            ')';
+        } else {
+          if (dob) {
+            value = name + ' (' + calcAge(dob) + ')';
+          } else if (gender) {
+            value =
+              addGenderPrefix(gender) + name + ' (' + gender.charAt(0) + ')';
+          } else {
+            value = name;
+          }
+        }
+        return value;
+      });
+
+      Handlebars.registerHelper('ifCond', function (v1, v2, options) {
+        if (v1 || v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      });
+
+      Handlebars.registerHelper('ifCondFor3', function (v1, v2, v3, options) {
+        if (v1 || v2 || v3) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      });
+
+      Handlebars.registerHelper(
+        'getLetterHead',
+        function (isPrint, headerSpace) {
+          let headerContainer = '';
+          if (isPrint) {
+            headerContainer = `<div style="height:${headerSpace}vh;margin-bottom:8px"></div>`;
+          }
+          return headerContainer;
+        }
+      );
+
+      Handlebars.registerHelper('formattedDate', function (value) {
+        return moment.unix(value / 1000).format('DD MMMM, YYYY');
+      });
+
+      Handlebars.registerHelper('formatToString', function (value) {
+        let vitals = [];
+        let props = Object.keys(value);
+        let val = Object.values(value);
+        for (let i = 0; i < val.length; i++) {
+          vitals.push(
+            `<span class="f-10 primary semi-bold w-100">` +
+              props[i] +
+              ` <span class="f-10 secondary medium">: ` +
+              val[i] +
+              '</span></span>'
+          );
+        }
+        return vitals.join('');
+      });
+
+      Handlebars.registerHelper('htmlUlTransform', function (value) {
+        let chars = value.split('\n');
+        for (let i = 0; i < chars.length; i++) {
+          let matches = chars[i].match(/\bhttps?:\/\/\S+/gi);
+          if (matches) {
+            value = value.replace(
+              '' + matches[0],
+              `<a href=${matches[0]} target="_blank">${matches[0]}</a>`
+            );
+          }
+          value = value.replace(
+            chars[i],
+            `<li class="li-val">&#x25CF;  ${chars[i]}</li>`
+          );
+        }
+        return `<ul>${value}</ul>`;
+      });
+
+      Handlebars.registerHelper('listInline', function (value) {
+        value = '&nbsp;&#x25CF;&nbsp;' + value;
+        let chars = value.split('\n');
+        for (let i = 0; i < chars.length; i++) {
+          let matches = chars[i].match(/\bhttps?:\/\/\S+/gi);
+          if (matches) {
+            value = value.replace(
+              '' + matches[0],
+              `<a href=${matches[0]} target="_blank">${matches[0]}</a>`
+            );
+          }
+        }
+        return value.replace('\n', '&nbsp;&#x25CF;');
+      });
+
+      Handlebars.registerHelper('listInlineSpace', function (value) {
+        value = '&nbsp;&nbsp;' + value;
+        let chars = value.split('\n');
+        for (let i = 0; i < chars.length; i++) {
+          let matches = chars[i].match(/\bhttps?:\/\/\S+/gi);
+          if (matches) {
+            value = value.replace(
+              '' + matches[0],
+              `<a href=${matches[0]} target="_blank">${matches[0]}</a>`
+            );
+          }
+        }
+        return value.replace('\n', '&nbsp;');
+      });
+
+      Handlebars.registerHelper('arrToList', function (value) {
+        let item = '';
+        for (let i = 0; i < value.length; i++) {
+          if (Object.keys(value[i]).length !== 0) {
+            days = value[i].num
+              ? `x ${value[i].num} ${value[i].interval || ''}`
+              : '';
+            remarks = value[i].remarks ? `( ${value[i].remarks} )` : '';
+            item += `<li class="li-val f-10 secondary medium">&#x25CF;  ${
+              value[i].name || ''
+            } ${value[i].dose || ''} ${
+              value[i].frequency || ''
+            } ${days} ${remarks}</li>`;
+          }
+        }
+        return `<ul>${item}</ul>`;
+      });
+      
+      Handlebars.registerHelper('formatToBullets', function (value) {
+        let vitals = [];
+        let props = Object.keys(value);
+        let val = Object.values(value);
+        for (let i = 0; i < val.length; i++) {
+          vitals.push(
+            `<li class="li-val f-10 secondary medium">&#x25CF;  <span class="f-10 primary semi-bold w-100">${props[i]} <span class="f-10 secondary medium">: ${val[i]}</span></span></li>`
+          );
+        }
+        return `<ul style="display:flex;" >${vitals.join('')}</ul>`;
+      })
+
+      Handlebars.registerHelper('htmlTransform', function (value) {
+        let chars = value.split('\n');
+        for (let i = 0; i < chars.length; i++) {
+          let matches = chars[i].match(/\bhttps?:\/\/\S+/gi);
+          if (matches) {
+            value = value.replace(
+              '' + matches[0],
+              `<a href=${matches[0]} target="_blank">${matches[0]}</a>`
+            );
+          }
+        }
+        return value.replace('\n', '<br>');
+      });
+
+      const data = getDataList.then(data => {
+        let respData = data;
+
+        let headerInfoTemplate = $('#header-template').html();
+        let hospitalInfoTemplate = $('#info-data').html();
+        let containerTemplate = $('#container-template').html();
+        let examineLeftInfoTemplate = $('#examine-left-template').html();
+        let examineRightInfoTemplate = $('#examine-right-template').html();
+        let drInfoTemplate = $('#dr-data').html();
+
+        let compiledHeadInfoTemplate = Handlebars.compile(headerInfoTemplate);
+        let compiledHosInfoTemplate = Handlebars.compile(hospitalInfoTemplate);
+        let compiledContainerTemplate = Handlebars.compile(containerTemplate);
+        let compiledLeftExamineInfoTemplate = Handlebars.compile(
+          examineLeftInfoTemplate
+        );
+        let compiledRightExamineInfoTemplate = Handlebars.compile(
+          examineRightInfoTemplate
+        );
+        let compiledDrInfoTemplate = Handlebars.compile(drInfoTemplate);
+
+        $('.letter-header').html(compiledHeadInfoTemplate(respData));
+        $('.top__head').html(compiledContainerTemplate(respData));
+        $('.container').html(compiledHosInfoTemplate(respData));
+        $('.prescription-container').html(
+          compiledLeftExamineInfoTemplate(respData)
+        );
+        $('.examine-right-container').html(
+          compiledRightExamineInfoTemplate(respData)
+        );
+        $('.footer__container').html(compiledDrInfoTemplate(respData));
+      });
+
+      /*]]>*/
+    </script>
+  </body>
+</html>

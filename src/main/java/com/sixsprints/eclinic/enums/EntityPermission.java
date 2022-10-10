@@ -1,0 +1,7 @@
+package com.sixsprints.eclinic.enums;
+
+public enum EntityPermission {
+
+  ANY, DASHBOARD, APPOINTMENT, PATIENT, CHAT_SESSION, DOCTOR, CHAT_PACKAGE, PAYMENT, CHECK_IN, VITALS_NOTES,
+  CALL_NEXT, CONSULTATION;
+}

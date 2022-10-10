@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://storage.googleapis.com/eclinic_assets/templates/receipt/css/style_v1.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.25.3/moment.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+      }
+
+      .page {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-rows: auto 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      .page__content {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+
+      .patient {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      .patient__name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1f1f1f;
+      }
+
+      .patient__id {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #5c5c5c;
+        margin-top: 3px;
+      }
+
+      .date {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #5c5c5c;
+        margin-top: 12px;
+      }
+
+      .qr-code {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 4.5rem;
+      }
+
+      .qr-code > img {
+        width: 100%;
+      }
+
+      .qr-code__text {
+        text-overflow: clip;
+        font-size: 0.675rem;
+        text-align: center;
+      }
+
+      @page {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="letterhead">
+        <!-- Letterhead height have to be set user from setting -->
+      </div>
+      <div class="page__content">
+       <script id="letterhead-template" type="text/x-handlebars-template">
+        <div class="patient">
+          <div class="patient__info">
+            <h3 class="patient__name">Mr. {{patient.name}} , {{patient.age}} ({{getGender patient.gender}})</h3>
+            <p class="patient__id">UHID: {{patient.uhid}}</p>
+            <p class="date">Consultation Date: {{formattedDate appointment.dateTime}}</p>
+          </div>
+          <div class="qr-code">
+            <!-- QR code will go here -->
+            <p class="qr-code__text">Link for Chat / Appointment</p>
+          </div>
+        </div>
+        </script>
+      </div>
+    </div>
+    
+     <script>
+      /*<![CDATA[*/
+      const url =
+        '[[${serverUrl}]]/api/v1/appointment/generate-letterhead/[[${appointmentSlug}]]';
+      const getDataList = fetch(url, {})
+        .then(response => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error('Something bad happened');
+          }
+        })
+        .then(data => {
+          return data.data;
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+
+      Handlebars.registerHelper('getAddress', function (addressObj) {
+        return `${addressObj.addressLine1 ? addressObj.addressLine1 + ', ' : ''}
+           ${addressObj.addressLine2 ? addressObj.addressLine2 + ', ' : ''}
+           ${addressObj.city ? addressObj.city + ', ' : ''}
+           ${addressObj.state ? addressObj.state : ''}
+           ${
+             addressObj.state
+               ? addressObj.pincode
+                 ? '- ' + addressObj.pincode
+                 : ''
+               : addressObj.pincode
+               ? 'Pincode- ' + addressObj.pincode
+               : ''
+           }
+            `;
+      });
+
+      Handlebars.registerHelper('getGender', function (value) {
+        return value.charAt(0).toUpperCase();
+      });
+
+      Handlebars.registerHelper('ifCond', function (v1, v2, options) {
+        if (v1 || v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      });
+
+      Handlebars.registerHelper('formattedDate', function (value) {
+        return moment.unix(value / 1000).format('DD MMMM, YYYY | HH:MM A');
+      });
+
+      Handlebars.registerHelper('getAmount', function (value) {
+        if (value) {
+          return `Rs ${value}`;
+        }
+        return value || 0;
+      });
+
+      Handlebars.registerHelper('getStatus', function (appointObj) {
+        let val = '';
+        if (appointObj.isFriends) {
+          val = '\n(Friends & Family)';
+        }
+        return val;
+      });
+
+      Handlebars.registerHelper('getPaymentStatus', function (mode, value) {
+        let list = ['Cash', 'UPI', 'Credit/Debit Card', 'E-Money'];
+        let tr = '';
+        for (let i = 0; i < list.length; i++) {
+          if (list[i] === mode) {
+            tr += `<tr>
+                          <td class="value lh-20">
+                             ${list[i]}
+                          </td>
+                          <td class="value lh-20">
+                             Rs. ${value}
+                          </td>
+                         </tr>`;
+          } else {
+            tr += `<tr>
+                      <td class="value lh-20">
+                        ${list[i]}
+                      </td>
+                      <td class="value lh-20">
+                        0
+                      </td>
+                      </tr>`;
+          }
+        }
+        return tr;
+      });
+
+      const data = getDataList.then(data => {
+        let respData = data;
+        $(document).ready(function () {
+          let hospitalInfoTemplate = $('#header-template').html();
+          let patientInfoTemplate = $('#patient-template').html();
+          let appointmentTemplate = $('#appointment-template').html();
+          let drTemplate = $('#dr-template').html();
+          let paymentTemplate = $('#letterhead-template').html();
+          let footerTemplate = $('#footer-template').html();
+
+          let compiledHosInfoTemplate =
+            Handlebars.compile(hospitalInfoTemplate);
+          let compiledPatInfoTemplate = Handlebars.compile(patientInfoTemplate);
+          let compiledAppointmentTemplate =
+            Handlebars.compile(appointmentTemplate);
+          let compiledDrTemplate = Handlebars.compile(drTemplate);
+          let compiledPaymentTemplate = Handlebars.compile(paymentTemplate);
+          let compiledFooterTemplate = Handlebars.compile(footerTemplate);
+
+          $('.header').html(compiledHosInfoTemplate(respData));
+          $('.patient-info').html(compiledPatInfoTemplate(respData));
+          $('.appointment-info').html(compiledAppointmentTemplate(respData));
+          $('.dr-info').html(compiledDrTemplate(respData));
+          $('.page__content').html(compiledPaymentTemplate(respData));
+          $('.footer-info').html(compiledFooterTemplate(respData));
+        });
+      });
+
+      /*]]>*/
+    </script>
+  </body>
+</html>

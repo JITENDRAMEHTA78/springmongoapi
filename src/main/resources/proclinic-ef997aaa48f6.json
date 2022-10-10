@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "proclinic",
+  "private_key_id": "ef997aaa48f6f0d39e18447261d4142070f5bb4a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2KSBYFhDwAx/Z\nzyk1aHYyPCxpq4rse1Zgah89mqT8L8tPP6EVZSz43+S5ksHMUS8gSpw9f8estISj\nCHgBqiOwHLxd9O0ZKS7QWplhF9hgqRt62Un7FXQkrtHR577aY5cKMsxFOsuyVw+a\ne+f1SexhhB7cYlkFWpGS4crP1rZdKt3MHZrNWfJjwLj1MAdwuEFfNv4TIml4Y5AQ\n1yyImOHpZ3VnY6yyegq7sFfZAzkQbWOQdCgHOmuShcX/xoIrAQiBEMc4dN4lcKVj\nXXjSllphvT96m/ua15PWt4iJbYC6ZQcx2jUGSAVXCgk/09vU5q7QoorV3b8LpUaH\n1sJ71jQFAgMBAAECggEAEGUaMqNlydxWIQnqqRJqVPIigy471jXxm8LhZe+Fuubo\nUw0kh+LvzcSE9wjU5XlHFw5wCn72Lz6eE3hfKLMx/BdSAtjZACM7QehtlpYJVQXT\nYdatuGoBZo3Pd6d2f3xoKzRQO0jj7Xy1fE97nJGXM12rU2WMopU4tfIZiWRHTJI4\nlB7MvlOUjpA1ZHwXsVFpHopb8FhKhf0XguTZv+wKzSJGGc+jLihQ+DqhQ83M8yPs\n0r9wLfloPOADyE7Gbeq+QKv3e4iWTwhcu1OiEB/9UOEsBkLht2W04AKoP3YzFs1H\ncWGncRA2G3elK0yAfEFslaG3TuTc8dYlWvGXG9ipMQKBgQDsrAbH319nSHZBKIJW\nV1h8htB3EYNK+ouhHy2ARvf2khdPeZQVYLm78GeP8LaJsXtEx4T9GoRmwqE9iw4o\nFI5Jpnkz4/I8CRxcu11IYr9h0LWTcK9OClqM44BGbb0QC+1S0qKS4SIZbsNXGUGI\n2wfr3TWGfRGMRfb6/BadTUShHQKBgQDFCXX8ev7pBRRvkRFrVgtFKX72hBilseBJ\nvT2TqG68+zaTKk0mcU3Ec6zin5849EWaeEi6f56CDgKUz6oE8tSQT2VgLqPXfQ/1\nmbpMAcXaFUXeoBh4bfzwew8lBkBgfjCadGSKDFaAWiu3YgX5n8usDfPSms2M/nH7\nNP6eVpKSCQKBgGJcOFE3B2pgVi1MTabelDrkuJzTnXI64G7tCzcFx6YlHyT7jUy5\nL1fpWNEcpHBjX6y9Ewsxyxb+Co8OTKrhqCT51+N198V1r+DmSaV8zLc1S1Fkgqb3\nbJyjLDuY/fs+SbqjKcfLYyWYv/xh1bev+AHRpJ4pOnLG3ReAT1G+vCgNAoGAQWKm\nWKaoOMOKyIsncKsZClZ+32dulm20tEOsT3exZ90leyiqeXtYBz0rvfiiadAF2QDZ\ngaof+6CSkrdnAEVk7I6sYYKYtEW4KhRdkiN0eK5ehUYzWKOHMHZlzC+K5Xp6voap\nZnY5rlY985j/ypqQiAQJSXY9h/BX+rjXVcv8z6ECgYBBt/4MBaUE8H87FpIr7L1G\nk6S7BHR8pI8Yoq9n0E7Ih7RcBu0T0HoqV3ic7NfMTaeUq+QGiFai/R1iB0NjPkQk\naN4HMsGBBbhmmDlXwrA6nOJot2MhCtzW8ZHySXPZBcqHn631KfDJS1fYz9IkOIL6\nvCpQ3A8lvyTZ+HnLUn0QdA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "proclinic-bot@proclinic.iam.gserviceaccount.com",
+  "client_id": "109939658040957666975",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/proclinic-bot%40proclinic.iam.gserviceaccount.com"
+}
